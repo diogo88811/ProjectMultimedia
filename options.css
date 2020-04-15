@@ -1,0 +1,40 @@
+p
+{	
+
+	position: absolute;
+	margin:0px;
+	margin-right: 0px;
+	width: 100px;
+	top:25px;
+	left:180px;
+}
+
+#music
+{	
+	position: relative;
+	top:200px;
+
+}
+
+#sound
+{
+	position: relative;
+	top:200px;
+
+}
+
+.volume
+{
+	position: relative;
+	background-color: inherit;
+	border: none;
+	left:330px;
+}
+
+#backButton
+{	
+	position: relative;
+	background-color: inherit;
+	border: none;
+	top:170px;
+}

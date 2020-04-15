@@ -1,0 +1,42 @@
+main
+{
+	margin: auto;
+	width: 800px;
+	height: 600px;
+	background: url("../resources/back_600_800.jpg");
+}
+
+@font-face
+{
+	font-family: letter;
+	src: url(../resources/towerruins.ttf);
+}
+
+body
+{
+	margin: 0px;
+	font-family: letter;
+	font-size: 50px;
+	color: black;
+}
+
+button
+{
+	background-color: inherit;
+	border: none;
+	padding: 0px;
+}
+
+button:active
+{
+	transform: translateY(5px);
+}
+
+button:focus 
+{
+	outline: 0;	
+}
+
+#logo{
+	position: absolute;
+}

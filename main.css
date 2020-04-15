@@ -1,0 +1,21 @@
+body
+{
+	margin: 0px;
+}
+iframe
+{
+	height: 600px;
+	width: 800px;
+	margin: auto;
+	display: block;
+	border: none;
+}
+
+iframe
+{
+	background: gray;
+}
+
+* {
+    outline: 0;
+}
