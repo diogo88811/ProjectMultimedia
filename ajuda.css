@@ -6,6 +6,7 @@ section{
 }
 
 #rock{
+	top: 100px;
 	position: absolute;
 	left: 230px;
 
@@ -15,7 +16,7 @@ p{
 	align-content: center;
 	opacity: 1;
 	margin: auto;
-	top :40px;
+	top :140px;
 	width: 250px;
 	height: 80px;
 	left :280px;
@@ -25,7 +26,7 @@ p{
 nav{
 	position: relative;
 	margin: auto;
-	top:300px;
+	top:450px;
 	height: 145px;
 	display: flex;
 	justify-content: space-between;
