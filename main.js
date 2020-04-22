@@ -1,6 +1,6 @@
 "use strict";
 
-//main
+
 (function()
 {	
 	window.addEventListener("load", main);
@@ -22,15 +22,8 @@ function showPage(pageName)
 	hidePage();
 	//carregar página na frame e enviar mensagem para a página logo que esteja carregada (frameLoadHandler)
 	var frm = document.getElementsByTagName("iframe")[0];
-	frm.src = "../html/"+pageName+".html";
-
-	/*if(pageNum == totPages) //se última, esconder botão de navegação
-	{
-		var btn = document.getElementsByTagName("button")[0];
-		btn.style.visibility = "hidden";
-		btn.removeEventListener("click", btnNextPageHandler);  //remover clicks no botão de navegação		
-	}*/
-
+	frm.src = "../html/" + pageName + ".html";
+	
 }
 
 function hidePage()  //não é necessário (excepto se páginas diferentes tivessem zonas de navegação diferentes)
@@ -58,7 +51,7 @@ function messageHandler(ev) {
 		showPage("ajuda");
 	}
 	else if(ev.data == "credits"){
-		//showPage("creditos");
+		showPage("creditos");
 	}
 	else if(ev.data == "exit"){
 		console.log("Fechar");

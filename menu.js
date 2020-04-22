@@ -49,3 +49,10 @@ function main()
     }
 
 }
+
+function messageHandler(ev) {
+    
+    console.log("No menu:" + ev.sorce);
+    console.log(ev.data);
+
+}
