@@ -3,19 +3,19 @@ main
 	margin: auto;
 	width: 800px;
 	height: 600px;
-	background: url("../resources/back_600_800.jpg");
+	background: url("../resources/images/menuBackground.jpg");
 }
 
 @font-face
 {
-	font-family: letter;
-	src: url(../resources/towerruins.ttf);
+	font-family: johnyStyle;
+	src: url(../resources/fonts/towerruins.ttf);
 }
 
 body
 {
 	margin: 0px;
-	font-family: letter;
+	font-family: johnyStyle;
 	font-size: 50px;
 	color: black;
 }
