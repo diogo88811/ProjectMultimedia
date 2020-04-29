@@ -1,0 +1,60 @@
+section{
+	width: 400px;
+	height: 350px;
+}
+
+#transparente{
+	position: relative;
+	margin: auto;
+	top: 120px;
+	background-color: black;
+	opacity: 0.6;
+}
+
+#texto{
+	position: absolute;		
+	font-size: 30px;
+	top:150px;
+	left: 200px;
+}
+
+p{
+	position: absolute;
+	color: white;
+}
+
+.acoes{
+	left: 250px;
+	width: 200px;
+}
+
+.teclas{
+	left: 60px;
+	width: 50px;
+}
+
+#saltar{
+	top: 0px;
+}
+
+#esquerda{
+	top: 70px;
+
+}
+
+#direita{
+	top: 140px;
+}
+
+#atacar{
+	top: 210px;
+}
+
+nav{
+	position: relative;
+	margin: auto;
+	height: 145px;
+	top: 100px;
+	display: flex;
+	justify-content: space-between;
+}

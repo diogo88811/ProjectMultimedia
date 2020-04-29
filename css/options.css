@@ -1,0 +1,47 @@
+p
+{	
+
+	position: absolute;
+	margin:0px;
+	margin-right: 0px;
+	width: 100px;
+	top:25px;
+	left:130px;
+}
+
+#bars1, #bars2{
+	position: absolute;
+	margin:0px;
+	margin-right: 0px;
+	right:100px;
+}
+
+#music
+{	
+	position: relative;
+	top:200px;
+
+}
+
+#sound
+{
+	position: relative;
+	top:200px;
+
+}
+
+.button
+{
+	position: relative;
+	background-color: inherit;
+	border: none;
+	left:350px;
+}
+
+#backButton
+{	
+	position: relative;
+	background-color: inherit;
+	border: none;
+	top:300px;
+}
