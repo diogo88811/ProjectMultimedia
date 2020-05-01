@@ -7,7 +7,8 @@ class MotorJogo{
 	init(ctx){
 		var nLoad = 0;
 		var totLoad = 4;
-		var imgArray = new Array(3);
+		var imgArray = new Array(2);
+		var johnyArray = new Array(1);
 		var img; 
 
 		//carregar imagens e criar sprites
@@ -42,13 +43,13 @@ class MotorJogo{
 			switch(img.id) {
 
 				case "johny":
-					imgArray[0] = img;
+					johnyArray[0] = img;
 					break;
 				case "platform":
-					imgArray[1] = img;
+					imgArray[0] = img;
 					break;
 				 case "plat2":
-					imgArray[2] = img;
+					imgArray[1] = img;
 				 	break;
 				case "background":
 					var xInit = canvas.width/2 - img.width/2;
@@ -61,6 +62,7 @@ class MotorJogo{
 			if (nLoad == totLoad){
 				var ev2 = new Event("initend");
 				ev2.imgArray = imgArray;
+				ev2.johnyArray = johnyArray;
 				ctx.canvas.dispatchEvent(ev2);
 			}
 		}	
@@ -112,11 +114,20 @@ class MotorJogo{
 
 
 		var spArray = level.plataformas;
-
-		console.log(level.spArray);
-		console.log("ole" + level.johny)
 		
-		johny.playerMove(cw,ch);
+		johny.playerMove(level.plataformas);
+
+		for(let i = 0; i < level.plataformas.length; i++ ){
+            var dir = johny.colCheckPlat(level.plataformas[i]);
+            console.log(dir)
+            if (dir === "l" || dir === "r") {
+                console.log("letf and right");
+            } else if (dir === "b") {
+                console.log("botom");
+            } else if (dir === "t") {
+                console.log("top");
+            }
+        }
 		
 		// for(let i = 1; i<spArray.length; i++){
 		// 	if(spArray[i].intersectPixelCheck(spArray[0])){
@@ -125,18 +136,6 @@ class MotorJogo{
 		// 		spArray[0].jump1 = false;
 		// 	}
 		// }
-
-		for(let i = 0; i < spArray.length; i++ ){
-			var dir = johny.colCheckPlat(spArray[i]);
-			console.log(dir)
-			if (dir === "l" || dir === "r") {
-				console.log("letf and right");
-			} else if (dir === "b") {
-				console.log("botom");
-			} else if (dir === "t") {
-				console.log("top");
-			}
-		}
 		
 		this.clear(ctx);
 		johny.draw(ctx);

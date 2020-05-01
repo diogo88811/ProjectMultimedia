@@ -2,10 +2,11 @@
 
 class Nivel
 {
-    constructor(spArray, mapa){
+    constructor(spArray, mapa, johny){
         this.spArray = spArray;
         this.mapa = mapa;
         this.plataformas = [];
+        this.johny = johny;
     }
 
 
@@ -24,7 +25,7 @@ class Nivel
                     end = x;
                 }
                 if (start != null && end != null) {
-                    var plat = new Plat(start*20,y*20,(end-start+1)*20,20,this.spArray[1]);
+                    var plat = new Plat(start*20,y*20,(end-start+1)*20,20,this.spArray[0]);
                     this.plataformas.push(plat);
                     start = end = null;
                 }

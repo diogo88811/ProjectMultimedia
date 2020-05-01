@@ -17,8 +17,7 @@ class SpriteImage
 			
     }
 
-    getImageData(img)
-    {
+    getImageData(img){
         var canvas = document.createElement("canvas");
         canvas.height = this.height;
         canvas.width = this.width;
@@ -30,8 +29,7 @@ class SpriteImage
         return ctx.getImageData(0,0,this.width,this.height);
     }
 
-    draw(ctx)
-    {  
+    draw(ctx){  
         ctx.drawImage(this.img,this.x,this.y,this.width,this.height);
     }
 
@@ -81,21 +79,20 @@ class Enenmy extends SpriteImage
 
 class MainChar extends SpriteImage
 {
-    constructor(x,y,w,h,img,speed,left,right,up)
+    constructor(x,y,w,h,img)
     {
         super(x,y,w,h,img);
-        this.speed = speed;
-        this.left = left;
-        this.right = right;
-        this.up = up;
+        this.left = false;
+        this.right = false;
+        this.up = false;
+        this.canJump = true;
         this.jumping = false;
         this.velocity = 0.6;
         this.xVelocity = 0;
         this.yVelocity = 0;
     }
-    
 
-    playerMove(cw,ch)
+    playerMove(array)
 	{	
         if(this.up && this.jumping == false){
             this.yVelocity = -30;
@@ -103,16 +100,19 @@ class MainChar extends SpriteImage
         }
 
 		if(this.left){
-            this.xVelocity -= 0.7;
+            this.xVelocity -= 0.5;
         }
 
 		if(this.right){
-            this.xVelocity += 0.7;
+            this.xVelocity += 0.5;
         }
 
         this.yVelocity += 1.5;
         this.x += this.xVelocity;
         this.y += this.yVelocity;
+        for(let i=0; i< array.length; i++){
+            array[i].update(this.xVelocity);
+        }
         this.xVelocity *= 0.9;
         this.yVelocity *= 0.92;
 
@@ -121,27 +121,26 @@ class MainChar extends SpriteImage
             this.y = 440;
             this.yVelocity = 0;
         }
-
     }
-
 
     colCheckPlat(plat)
     {
-        var vX = (this.x +(this.w / 2)) - (plat.x + (plat.w / 2));
-        var vY = (this.y +(this.h / 2)) - (plat.y + (plat.h / 2));
-        var hWidths = (this.w / 2) + (plat.w /2);
-        var hHeights = (this.h / 2) + (plat.h /2); 
+        var vX = (this.x +(this.width / 2)) - (plat.x + (plat.width / 2));
+        var vY = (this.y +(this.height / 2)) - (plat.y + (plat.height / 2));
+        var hWidths = (this.width / 2) + (plat.width /2);
+        var hHeights = (this.height / 2) + (plat.height /2); 
         var colDir = null;
-        
+        console.log("entrei na func");
         console.log(Math.abs(vX));
         console.log(hWidths);
-        
+
         console.log(Math.abs(vY));
         console.log(hHeights);
 
         if(Math.abs(vX) < hWidths && Math.abs(vY) < hHeights) 
         {
-            var oX = hWidths - Math.abs(vX), oY = hHeights - Math.abs(vY);
+            var oX = hWidths - Math.abs(vX);
+            var oY = hHeights - Math.abs(vY);
             console.log("entrei no if crl");
             if (oX >= oY) {
                 if (vY > 0) {
@@ -159,11 +158,13 @@ class MainChar extends SpriteImage
                     colDir = "r";
                     this.x -= oX;
                 }
-            }    
-        
+            }
+
         }
         return colDir;
-    }   
+    }
+    
+    
 }
 
 class Plat extends SpriteImage
@@ -176,6 +177,10 @@ class Plat extends SpriteImage
     draw(ctx)
     {  
         ctx.drawImage(this.img,0,0,19,20,this.x,this.y,this.width,this.height);
+    }
+
+    update(velocity){
+        this.x -= velocity;
     }
 
 }
