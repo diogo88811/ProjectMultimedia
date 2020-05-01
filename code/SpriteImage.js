@@ -108,11 +108,19 @@ class MainChar extends SpriteImage
         }
 
         this.yVelocity += 1.5;
-        this.x += this.xVelocity;
         this.y += this.yVelocity;
-        for(let i=0; i< array.length; i++){
-            array[i].update(this.xVelocity);
+        if(this.x >= 300 && this.xVelocity > 0){
+            for(let i=0; i< array.length; i++){
+                array[i].update(this.xVelocity);
+            }
         }
+        else if(this.xVelocity < 0 && this.x <= 0){
+            this.xVelocity = 0;
+        }
+        else{
+            this.x += this.xVelocity;
+        }
+        
         this.xVelocity *= 0.9;
         this.yVelocity *= 0.92;
 
