@@ -13,86 +13,81 @@ function main(){
 	var ctx = canvas.getContext("2d");
     var spArray;  //sprite array
 	canvas.addEventListener("initend", initEndHandler);
+	var johny;
+
+	var mapa = new Array("                                                                                                                                    ",
+						 "                                                                                                                                    ",
+						 "                                                                                                                                    ",
+						 "                                                                                                                                    ",
+						 "                                                                                                                                    ",
+						 "                                                                                                                                    ",
+						 "                                   ######                                                                                           ",
+						 "                            ######         #####                                                                                    ",
+						 "                   ######                                                                                                           ",
+						 "       ######                                                                                                                       ",
+						 "                                                                                                                                    ",
+						 "                                                                                                                                    ",
+						 "                                                                                                                                    ",
+						 "                                                                                                                                    ",
+						 "                                                                                                                                    ",
+						 "                                                                                                                                    ",
+						 "                                                                                                                                    ",
+						 "                                   ######                                                                                           ",
+						 "                            ######         #####                                                                                    ",
+						 "                   ######                                                                                                           ",
+						 "       ######                                                                                                                       ",
+						 "                                                                                                                                    ",
+						 "                                                                                                                                    ",
+						 "                                                                                                                                    ",
+						 "                                                                                                                                    ",
+						 "                                                                                                                                    ",
+						 "  J                                                                                                                                  ",
+						 "----------------------------------------------------------------------------------------------------------------------------------- ",
+						 "----------------------------------------------------------------------------------------------------------------------------------- ",
+						 "----------------------------------------------------------------------------------------------------------------------------------- ",
+						 );
 	
 
-    var motorjogo = new MotorJogo();
+	var motorjogo = new MotorJogo();
 	motorjogo.init(ctx);
 
 
     function initEndHandler(ev){
 
-        addEventListener("keydown",kdh);
-        addEventListener("keyup",kuh);
+        addEventListener("keydown",kh);
+		addEventListener("keyup",kh);
 
-		spArray = ev.spArray;
-		
-			
-		//var level1 = new Nivel(spArray);
-       
-        startAnim(ctx,spArray,motorjogo);
+		johny = new MainChar(20,450,50,100,ev.imgArray[0],5,false,false,false);
+		var level1 = new Nivel(ev.imgArray,mapa);
+		//level1.setImgArray(ev.imgArray);
+		//level1.level1();
+
+		level1.initialiseMap();
+		level1.drawMap(ctx);
+        startAnim(ctx, motorjogo, level1,johny);
     }
     
-    var kdh = function(ev)
+    var kh = function(ev)
     {
-        canvasKeyDownHandler(ev, spArray);
-    }
-
-    var kuh = function(ev)
-    {
-        canvasKeyUpHandler(ev, spArray);
+		console.log(johny);
+        motorjogo.canvasKeyHandler(ev, johny);
     }
 }
 
-function startAnim(ctx, spArray, motorjogo)
+function startAnim(ctx, motorjogo, level,johny)
 {
-    motorjogo.draw(ctx, spArray);
-    animLoop(ctx, spArray, motorjogo);	
+    motorjogo.draw(ctx, level, johny);
+    animLoop(ctx, motorjogo, level,johny);	
 }
 
-function animLoop(ctx, spArray, motorjogo)
+function animLoop(ctx, motorjogo, level,johny)
 {	
 	var al = function(time)
 	{
-		animLoop(ctx,spArray,motorjogo);
+		animLoop(ctx, motorjogo, level,johny);
 	}
 
 	var reqID = window.requestAnimationFrame(al);
 	
-	motorjogo.render(ctx, reqID, spArray);
-}
-
-function canvasKeyDownHandler(ev, spArray)
-{
-	var sp = spArray[0];
-	switch(ev.code){
-		case "ArrowLeft":
-			sp.left = true;
-			break;
-		case "ArrowUp":
-			sp.up = true;
-			break;
-		case "ArrowRight":
-			sp.right = true;
-			break;
-		case "Space":
-			sp.jump1 = true;
-			break;
-	}
-}
-
-function canvasKeyUpHandler(ev, spArray)
-{
-	var sp = spArray[0];
-	switch(ev.code){
-		case "ArrowLeft":
-			sp.left = false;
-			break;
-		case "ArrowUp":
-			sp.up = false;
-			break;
-		case "ArrowRight":
-			sp.right = false;
-			break;
-
-	}
+	motorjogo.render(ctx, reqID, level, johny);
 }

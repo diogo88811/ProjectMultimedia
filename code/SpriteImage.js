@@ -88,67 +88,62 @@ class MainChar extends SpriteImage
         this.left = left;
         this.right = right;
         this.up = up;
+        this.canJump = true;
         this.jump1 = false;
+        this.velocity = 0.6;
+        this.xVelocity = 0;
+        this.yVelocity = 0;
     }
     
-    gravity(){
-        //this.velocity += this.velocity * 0.3;
-        this.y += 0.1 * 50;
+    // gravity(){
+    //     this.velocity += this.velocity * 0.1;
+    //     this.y += this.velocity * 50;
 
-        if (this.y >= 360){
-            this.y = 360;
-            //this.velocity = 0.5;
-        }
+    //     if (this.y >= 360){
+    //         this.y = 360;
+    //         this.velocity = 0.6;
+    //         this.canJump = true;
+    //     }
     
-    }
+    // }
 
-    jump(){
-        //this.velocity -= this.velocity* 0.1;
-        //this.y -= 50*this.velocity;
-        this.y -= 50*0.1;
+    // jump(){
+    //     this.velocity -= this.velocity* 0.2;
+    //     this.y -= 50*this.velocity;
 
-        if(this.y <= 200){
-            //this.velocity = 0.5;
-            this.jump1 = false;
-        }
-    }
+    //     console.log(this.velocity);
+    //     if(this.velocity <= 0.01){
+    //         this.velocity = 0.6;
+    //         this.jump1 = false;
+    //     }
+    // }
 
     playerMove(cw,ch)
 	{	
-
-		if(this.left && this.x > 0)
-		{
-			this.x -= this.speed;
-		}
-
-		if(this.right && this.x < cw){
-			if (this.x + this.width + 5 > cw)
-				this.x = cw - this.width;
-			else
-				this.x = this.x + this.speed;
-		}
-
-		if(this.down && this.y < ch)
-		{
-			if (this.y + this.height + 5 > ch)
-				this.y = ch - this.height;
-			else
-				this.y = this.y + this-this.speed;
-		}
-
-		if(this.up && this.y > 0){
-            this.jump = true;
-        }
-        
-        if(this.jump1 == true){
-            this.jump();
-            console.log("saltou");
+        if(this.up && this.jumping == false){
+            this.yVelocity = -40;
+            this.jumping = true;
         }
 
-        if(this.jump1 == false){
-            this.gravity();
+		if(this.left){
+            this.xVelocity -= 0.7;
         }
 
+		if(this.right){
+            this.xVelocity += 0.7;
+        }
+
+        this.yVelocity += 1.5;
+        this.x += this.xVelocity;
+        this.y += this.yVelocity;
+        this.xVelocity *= 0.9;
+        this.yVelocity *= 0.99;
+
+		if(this.y > 360){
+            this.jumping = false;
+            this.y = 360;
+            this.yVelocity = 0;
+        }
     }
 
     
@@ -160,6 +155,11 @@ class Plat extends SpriteImage
     constructor(x, y, w, h, img)
     {
         super(x, y, w, h, img);
+    }
+
+    draw(ctx)
+    {  
+        ctx.drawImage(this.img,0,0,19,20,this.x,this.y,this.width,this.height);
     }
 
 }
