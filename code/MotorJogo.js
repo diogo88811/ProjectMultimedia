@@ -125,6 +125,18 @@ class MotorJogo{
 		// 		spArray[0].jump1 = false;
 		// 	}
 		// }
+
+		for(let i = 0; i < spArray.length; i++ ){
+			var dir = johny.colCheckPlat(spArray[i]);
+			console.log(dir)
+			if (dir === "l" || dir === "r") {
+				console.log("letf and right");
+			} else if (dir === "b") {
+				console.log("botom");
+			} else if (dir === "t") {
+				console.log("top");
+			}
+		}
 		
 		this.clear(ctx);
 		johny.draw(ctx);

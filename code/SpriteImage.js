@@ -88,40 +88,17 @@ class MainChar extends SpriteImage
         this.left = left;
         this.right = right;
         this.up = up;
-        this.canJump = true;
-        this.jump1 = false;
+        this.jumping = false;
         this.velocity = 0.6;
         this.xVelocity = 0;
         this.yVelocity = 0;
     }
     
-    // gravity(){
-    //     this.velocity += this.velocity * 0.1;
-    //     this.y += this.velocity * 50;
-
-    //     if (this.y >= 360){
-    //         this.y = 360;
-    //         this.velocity = 0.6;
-    //         this.canJump = true;
-    //     }
-    
-    // }
-
-    // jump(){
-    //     this.velocity -= this.velocity* 0.2;
-    //     this.y -= 50*this.velocity;
-
-    //     console.log(this.velocity);
-    //     if(this.velocity <= 0.01){
-    //         this.velocity = 0.6;
-    //         this.jump1 = false;
-    //     }
-    // }
 
     playerMove(cw,ch)
 	{	
         if(this.up && this.jumping == false){
-            this.yVelocity = -40;
+            this.yVelocity = -30;
             this.jumping = true;
         }
 
@@ -137,17 +114,56 @@ class MainChar extends SpriteImage
         this.x += this.xVelocity;
         this.y += this.yVelocity;
         this.xVelocity *= 0.9;
-        this.yVelocity *= 0.99;
+        this.yVelocity *= 0.92;
 
-		if(this.y > 360){
+		if(this.y > 440){
             this.jumping = false;
-            this.y = 360;
+            this.y = 440;
             this.yVelocity = 0;
         }
+
     }
 
-    
-    
+
+    colCheckPlat(plat)
+    {
+        var vX = (this.x +(this.w / 2)) - (plat.x + (plat.w / 2));
+        var vY = (this.y +(this.h / 2)) - (plat.y + (plat.h / 2));
+        var hWidths = (this.w / 2) + (plat.w /2);
+        var hHeights = (this.h / 2) + (plat.h /2); 
+        var colDir = null;
+        
+        console.log(Math.abs(vX));
+        console.log(hWidths);
+        
+        console.log(Math.abs(vY));
+        console.log(hHeights);
+
+        if(Math.abs(vX) < hWidths && Math.abs(vY) < hHeights) 
+        {
+            var oX = hWidths - Math.abs(vX), oY = hHeights - Math.abs(vY);
+            console.log("entrei no if crl");
+            if (oX >= oY) {
+                if (vY > 0) {
+                    colDir = "t";
+                    this.y += oY;
+                } else {
+                    colDir = "b";
+                    this.y -= oY;
+                }
+            } else {
+                if (vX > 0) {
+                    colDir = "l";
+                    this.x += oX;
+                } else {
+                    colDir = "r";
+                    this.x -= oX;
+                }
+            }    
+        
+        }
+        return colDir;
+    }   
 }
 
 class Plat extends SpriteImage
