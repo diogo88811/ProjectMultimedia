@@ -58,7 +58,7 @@ function main(){
 		addEventListener("keyup",kh);
 
 		johny = new MainChar(20,450,50,90,ev.johnyArray[0]);
-		var level1 = new Nivel(ev.imgArray,mapa,johny);
+		var level1 = new Nivel(ev.background,ev.platArray,mapa,johny);
 
 		level1.initialiseMap();
 		level1.drawMap(ctx);

@@ -2,11 +2,12 @@
 
 class Nivel
 {
-    constructor(spArray, mapa, johny){
+    constructor(background,spArray, mapa, johny){
         this.spArray = spArray;
         this.mapa = mapa;
         this.plataformas = [];
         this.johny = johny;
+        this.background = background;
     }
 
 
@@ -35,6 +36,7 @@ class Nivel
     }
 
     drawMap(ctx){
+        ctx.drawImage(this.background,0,0,800,600);
         for(let i = 0; i< this.plataformas.length; i++){
             this.plataformas[i].draw(ctx);
         }

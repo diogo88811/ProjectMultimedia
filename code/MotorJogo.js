@@ -6,9 +6,11 @@ class MotorJogo{
 	
 	init(ctx){
 		var nLoad = 0;
-		var totLoad = 4;
-		var imgArray = new Array(2);
-		var johnyArray = new Array(1);
+		var totLoad = 5;
+		var bullet;
+		var background;
+		var platArray = new Array(2);
+		var johnyArray = new Array(2);
 		var img; 
 
 		//carregar imagens e criar sprites
@@ -17,6 +19,11 @@ class MotorJogo{
 		img.addEventListener("load", imgLoadedHandler);
 		img.id="johny";
 		img.src = "../resources/johny/johny1.png";  //dá ordem de carregamento da imagem
+
+		img = new Image();
+		img.addEventListener("load", imgLoadedHandler);
+		img.id="bullet";
+		img.src = "../resources/bullet/fire.png";
 		
 		img = new Image();
 		img.addEventListener("load", imgLoadedHandler);
@@ -28,6 +35,7 @@ class MotorJogo{
 		img.id="background";
 		img.src = "../resources/background/back1.png";
 
+
 		img = new Image();
 		img.addEventListener("load", imgLoadedHandler);
 		img.id="plat2";
@@ -36,24 +44,25 @@ class MotorJogo{
 		function imgLoadedHandler(ev)
 		{
 			var img = ev.target;
-			var nw = img.naturalWidth;
-			var nh = img.naturalHeight;
-			var sp;
 			
 			switch(img.id) {
 
 				case "johny":
 					johnyArray[0] = img;
 					break;
-				case "platform":
-					imgArray[0] = img;
+				case "bullet":
+					bullet = img;
 					break;
-				 case "plat2":
-					imgArray[1] = img;
+				case "platform":
+					console.log(img + "EEEEEEEEEEEEEEEEEEEEEEEE");
+					platArray[0] = img;
+					break;
+				 case "platt2":
+					platArray[1] = img;
 				 	break;
 				case "background":
-					var xInit = canvas.width/2 - img.width/2;
-					ctx.drawImage(img,0,0);
+					background = img;
+					console.log(img + "EEEEEEEEEEEEEEEEEEEEEEEE");
 					break;
 			}
 
@@ -61,8 +70,10 @@ class MotorJogo{
 
 			if (nLoad == totLoad){
 				var ev2 = new Event("initend");
-				ev2.imgArray = imgArray;
+				ev2.platArray = platArray;
 				ev2.johnyArray = johnyArray;
+				ev2.background = background;
+				ev2.bullet = bullet;
 				ctx.canvas.dispatchEvent(ev2);
 			}
 		}	
@@ -138,8 +149,8 @@ class MotorJogo{
 		// }
 		
 		this.clear(ctx);
-		johny.draw(ctx);
 		level.drawMap(ctx);
+		johny.draw(ctx);
 		//this.draw(ctx,spArray);
 	}
 
