@@ -28,24 +28,24 @@ function main(){
 						 "                                                                                                                                    ",
 						 "                                                                                                                                    ",
 						 "                                                                                                                                    ",
+					 	 "                                                                                                                                    ",
+					 	 "                                                                                                                                    ",
+						 "                                      C                                                                                              ",
+						 "                               C                                                                                 #                  ",
+						 "                     C             ######                                                                                           ",
+						 "         C                 ######         #####     #   #   #   #   #   #   #   #                    #####                         ",
+						 "                  ######                                                              #         #                                  ",
+						 "       ######                                                                               #                                 #     ",
+						 "                                                                                                                #             #     ",
+						 "                         E                                                                                                     #     ",
+						 "                                                                                                                              #     ",
+						 "                                                                                                                              #     ",
 						 "                                                                                                                                    ",
-						 "                                                                                                                                    ",
-						 "                                                                                                                                    ",
-						 "                                                                                                                                    ",
-						 "                                   ######                                                                                           ",
-						 "                            ######         #####                                                                                    ",
-						 "                   ######                                                                                                           ",
-						 "       ######                                                                                                                       ",
-						 "                                                                                                                                    ",
-						 "                                                                                                                                    ",
-						 "                                                                                                                                    ",
-						 "                                                                                                                                    ",
-						 "                                                                                                                                    ",
-						 "        # #  #    #     #    #                                                                                                      ",
+						 "            E                         E                                                                                               ",
 						 "----------------------------------------------------------------------------------------------------------------------------------- ",
 						 "----------------------------------------------------------------------------------------------------------------------------------- ",
 						 "----------------------------------------------------------------------------------------------------------------------------------- ",
-						 );
+						);
 	
 
 	var motorjogo = new MotorJogo();
@@ -57,8 +57,8 @@ function main(){
         addEventListener("keydown",kh);
 		addEventListener("keyup",kh);
 
-		johny = new MainChar(20,450,50,90,ev.johnyArray[0]);
-		var level1 = new Nivel(ev.background,ev.platArray,mapa,johny);
+		johny = new MainChar(20,450,50,90,ev.johnyArray[0], ev.bullet, ev.johnyArray);
+		var level1 = new Nivel(ev.background,ev.coin,ev.platArray,mapa,johny, ev.enemy[0]);
 
 		level1.initialiseMap();
 		level1.drawMap(ctx);
@@ -67,14 +67,12 @@ function main(){
     
     var kh = function(ev)
     {
-		console.log(johny);
         motorjogo.canvasKeyHandler(ev, johny);
     }
 }
 
 function startAnim(ctx, motorjogo, level,johny)
 {
-    motorjogo.draw(ctx, level, johny);
     animLoop(ctx, motorjogo, level,johny);	
 }
 
