@@ -19,14 +19,7 @@ p
 #music
 {	
 	position: relative;
-	top:200px;
-
-}
-
-#sound
-{
-	position: relative;
-	top:200px;
+	top:250px;
 
 }
 
@@ -43,5 +36,5 @@ p
 	position: relative;
 	background-color: inherit;
 	border: none;
-	top:300px;
+	top:400px;
 }

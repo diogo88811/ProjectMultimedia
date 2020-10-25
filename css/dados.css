@@ -1,0 +1,28 @@
+#inputBox{
+    position: relative;
+    margin: auto;
+    border: 2px solid lightblue;
+    background-color: lightblue;
+    border-radius: 4px;
+    width: 300px;
+    height: 40px;
+    left: 250px;
+    top: 200px;
+    
+    outline: none;
+    opacity: 0.8;
+}
+
+#start{
+    position: absolute;
+    margin: auto;
+    width: 100px;
+    top: 300px;
+    left: 260px;
+}
+
+nav{
+	position: absolute;
+    top: 470px;
+    left: 20px;
+}
