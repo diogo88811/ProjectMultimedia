@@ -10,21 +10,30 @@
 function main()
 {
 	var loop = document.getElementsByTagName("audio")[0];
-	var volume = 10;
+	var volume = 0;
+	var frm;
+
+	frm = document.getElementsByTagName("iframe")[0];
+	frm.addEventListener("load",frameLoadHandler);
 	window.addEventListener("message", messageHandler);
 	
 	showPage("menu");
 
+	function frameLoadHandler(ev){
+		var frm = ev.target;
+		frm.contentWindow.postMessage(volume,"*");
+	}
 
 	function messageHandler(ev) {
-
-		if(ev.data == "play"){
-			//showPage("jogar");
+		console.log(ev.data);
+		if(ev.data == "dados"){
+			showPage("dados");
 		}
 		else if(ev.data == "ranking"){
-			//showPage("ranking");
+			showPage("ranking");
 		}
 		else if(ev.data == "options"){
+			volume = ""+(loop.volume*10);
 			showPage("options");
 		}
 		else if(ev.data == "help"){
@@ -40,32 +49,34 @@ function main()
 			showPage("menu");
 		}
 		else if(ev.data == "musicUp"){
-			if(volume == 10){
+			if(volume < 10){
 				loop.play();
+				volume = loop.volume * 10 + 2;
 			}
-			else{
-				volume += 2;
-				loop.volume = (volume/10)
-			}			
+			loop.volume = (volume/10);	
 		}
 		else if(ev.data == "musicDown"){
-			volume -= 2;
-			loop.volume = volume/10;
-			if(volume <= 0){
-				volume.pause();
+			if(volume > 0){
+				volume = loop.volume * 10 - 2;
 			}
+			loop.volume = (volume/10);
 		}
 		else if(ev.data == "soundUp"){
-	
 		}
 		else if(ev.data == "soundDown"){
 	
+		}
+		else{
+			loop.pause();
+			volume = ev.data;
+			showPage("jogar");
 		}
 	}
 }
 
 
 //---- Navegação e gestão de janelas
+
 function showPage(pageName)
 {
 	hidePage();

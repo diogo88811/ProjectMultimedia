@@ -29,7 +29,7 @@ function main()
         switch(ev.currentTarget){
     
             case playBtn: 
-                parent.postMessage("play","*"); break;
+                parent.postMessage("dados","*"); break;
     
             case rankingBtn: 
                 parent.postMessage("ranking","*"); break;
